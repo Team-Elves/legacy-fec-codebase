@@ -67,8 +67,8 @@ class ProductCard extends React.Component {
         apiMaster
           .getProductStyles(this.props.relatedProducts[i])
           .then(
-            (res) =>
-              res.data.results[0].photos[0].thumbnail_url ||
+            (res) => res.data.results[0].photos[0] ? 
+              res.data.results[0].photos[0].thumbnail_url :
               'https://images.unsplash.com/photo-1529088148495-2d9f231db829?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80'
           )
           .catch((err) => {
@@ -162,14 +162,14 @@ class ProductCard extends React.Component {
                     </div>
                     <span
                       className={
-                        this.state.cardPrices[i].sale_price === '0'
+                        this.state.cardPrices[i].sale_price === 0
                           ? 'discounted-price-hidden'
                           : ''
                       }
                       style={
                         ({
                           textDecoration:
-                            this.state.cardPrices[i].sale_price !== '0'
+                            this.state.cardPrices[i].sale_price !== 0
                               ? 'line-through'
                               : 'none',
                         },
@@ -189,7 +189,7 @@ class ProductCard extends React.Component {
                       className="main-price-display"
                       style={{
                         textDecoration:
-                          this.state.cardPrices[i].sale_price !== '0'
+                          this.state.cardPrices[i].sale_price !== 0
                             ? 'line-through'
                             : 'none',
                       }}
